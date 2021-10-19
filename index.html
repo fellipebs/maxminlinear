@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Trabalho OLMP</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="functions.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+
+  <div class="row" >
+    <div class="col-md-6">
+
+        <label>Selecione o método que será utilizado</label>
+        <select class='form-control' id='metodo'>
+            <option value='1'>Maximização</option>
+            <option value='2'>Minimização</option>
+        </select>
+
+        <!-- Max z -->
+        <div class='row'>
+            <div class='col-md-1'>
+                Max Z
+            </div>
+            <div class="col-md-3">
+                <label>X</label>
+                <input type='text' id='Zx' class='form-control'>
+            </div>
+            <div class="col-md-3">
+                <label>Y</label>
+                <input type='text' id='Yx' class='form-control'>
+            </div>
+        </div>
+
+        <!-- Primeira linha -->
+        <div class='row'>
+            <div class='col-md-1'>
+                1º
+            </div>
+            <div class="col-md-3">
+                <label>X (1)</label>
+                <input type='text' id='X1' class='form-control'>
+            </div>
+            <div class="col-md-3">
+                <label>Y (1)</label>
+                <input type='text' id='Y1' class='form-control'>
+            </div>
+            <div class="col-md-2">
+                <label>Operação (1)</label>
+                <select class='form-control' id='operacao1'>
+                    <option value='1'> >= </option>
+                    <option value='2'> <= </option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Rs (1)</label>
+                <input type='text' id='RS1' class='form-control'>
+            </div>
+        </div>
+
+        <!-- Segunda linha -->
+        <div class='row'>
+            <div class='col-md-1'>
+                2º
+            </div>
+            <div class="col-md-3">
+                <label>X (2)</label>
+                <input type='text' id='X2' class='form-control'>
+            </div>
+            <div class="col-md-3">
+                <label>Y (2)</label>
+                <input type='text' id='Y2' class='form-control'>
+            </div>
+            <div class="col-md-2">
+                <label>Operação (2)</label>
+                <select class='form-control' id='operacao2'>
+                    <option value='1'> >= </option>
+                    <option value='2'> <= </option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Rs (2)</label>
+                <input type='text' id='RS2' class='form-control'>
+            </div>
+        </div>
+
+        <!-- Terceira linha -->
+        <div class='row'>
+            <div class='col-md-1'>
+                3º
+            </div>
+            <div class="col-md-3">
+                <label>X (3)</label>
+                <input type='text' id='X3' class='form-control'>
+            </div>
+            <div class="col-md-3">
+                <label>Y (3)</label>
+                <input type='text' id='Y3' class='form-control'>
+            </div>
+            <div class="col-md-2">
+                <label>Operação (3)</label>
+                <select class='form-control' id='operacao3'>
+                    <option value='1'> >= </option>
+                    <option value='2'> <= </option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Rs (3)</label>
+                <input type='text' id='RS3' class='form-control'>
+            </div>
+        </div>
+
+        <br>
+        <button class='btn btn-primary' id='processarBtn'>Processar</button>
+
+    </div>
+    <div class="col-md-6">
+        <label>Resultados/Passo a passo</label>
+        <textarea class='form-control' id='resultado' style='height: 800px;'></textarea>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
