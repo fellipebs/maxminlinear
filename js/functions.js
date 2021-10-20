@@ -45,8 +45,35 @@ function maximizacao(){ // Função para processo de maximização
 
     //Populando matriz com os valores iniciais
     for(var i = 0; i < linhas; i++){
-        matriz[i] = [1,3,1]
+
+        matriz[i] = [];
+        aux = 0; // Variavel de controle
+
+        for(var j = 0; j < linhas + 3; j++){ // linhas + 3, pois é o valor de equações + x,y e RS
+
+            if(j == 0) //Popular o X 
+                matriz[i][j] = parseFloat($('#X'+(i+1)).val());
+            else if(j == 1) //Popular o Y
+                matriz[i][j] = parseFloat($('#Y'+(i+1)).val());
+            else if(j == linhas + 2){
+                matriz[i][j] = parseFloat($('#RS'+(i+1)).val());   
+            }else{
+
+                if(aux != i){ // Preenchendo os valores adicionais com 0 e 1 (diagonal principal)
+                    matriz[i][j] = 0;   
+                }else{
+                    matriz[i][j] = 1;   
+                }
+                aux++;
+            }
+        }
+
+        aux = 0; // Variavel de controle
     }
+    //Fim população inicial
+
+    //Imprimindo a tabela inicial
+    imprimir(matriz, linhas);
 
 }
 
@@ -55,5 +82,15 @@ function minimizacao(){ // Função para processo de minimização
 }
 
 function imprimir(matriz, linhas){ // Função para imprimir a matriz
+
+    for(var i = 0; i < matriz.length; i++){
+        for (var j = 0; j < matriz[i].length; j++){
+            $('#resultado').html($('#resultado').html() + "  " + matriz[i][j] + "  ");
+        }
+        $('#resultado').html($('#resultado').html() + "\n");
+    }
+
+    $('#resultado').html($('#resultado').html() + "------------------------------------");
+
 
 }
