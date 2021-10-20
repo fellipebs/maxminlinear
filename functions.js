@@ -1,3 +1,6 @@
+// Declarando matriz inicial
+var matriz = [];
+
 function processar(){
 
     var Zx = $('#Zx').val();
@@ -33,6 +36,17 @@ function processar(){
 }
 
 function maximizacao(){
+
+    //Numero de equações.
+    var linhas = 3;
+    
+    // Declarando matriz inicial
+    matriz = [];
+
+    //Populando matriz com os valores iniciais
+    for(var i = 0; i < linhas; i++){
+        matriz[i] = [1,3,1]
+    }
 
 }
 
