@@ -4,7 +4,7 @@ var matriz = [];
 function processar(){
 
     var Zx = $('#Zx').val();
-    var Yx = $('#Zx').val();
+    var Yx = $('#Yx').val();
 
     var x1 = $('#X1').val();
     var y1 = $('#Y1').val();
@@ -66,14 +66,33 @@ function maximizacao(){ // Função para processo de maximização
                 }
                 aux++;
             }
+
         }
 
         aux = 0; // Variavel de controle
+    }
+
+    matriz[linhas] = []; // Iniciando fila final para valor de zx e zy
+    matriz[linhas][0] = parseFloat($('#Zx').val()) * - 1; // Multiplicando por -1 para mudar o sinal
+    matriz[linhas][1] = parseFloat($('#Yx').val()) * - 1;
+    for(var i = 0; i <= linhas; i++){
+        matriz[linhas][i + 2] = 0;
     }
     //Fim população inicial
 
     //Imprimindo a tabela inicial
     imprimir(matriz, linhas);
+
+    //Escolhendo o termo de menor valor na linha z
+    var valorminimo = Math.min(...matriz[3]);
+    imprimirTexto(" O menor valor da coluna Z é " + valorminimo + ", sua linha foi escolhida.");
+
+    var indice = matriz[linhas].indexOf(valorminimo); // Indice da coluna que será buscada
+
+    // Continuar daqui amanhã
+    for(var i = 0; i < matriz.length - 1; i++){
+        console.log(matriz[i][linhas + 2] / matriz[i][indice] );
+    }
 
 }
 
@@ -90,7 +109,11 @@ function imprimir(matriz, linhas){ // Função para imprimir a matriz
         $('#resultado').html($('#resultado').html() + "\n");
     }
 
-    $('#resultado').html($('#resultado').html() + "------------------------------------");
+    $('#resultado').html($('#resultado').html() + "------------------------------------ \n");
 
+}
 
+function imprimirTexto(texto){
+    $('#resultado').html($('#resultado').html() + "  " + texto + "  ");
+    $('#resultado').html($('#resultado').html() + "\n ------------------------------------ \n");
 }
