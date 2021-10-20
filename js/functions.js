@@ -1,3 +1,6 @@
+// Declarando matriz inicial
+var matriz = [];
+
 function processar(){
 
     var Zx = $('#Zx').val();
@@ -32,10 +35,25 @@ function processar(){
     }
 }
 
-function maximizacao(){
+function maximizacao(){ // Função para processo de maximização
+
+    //Numero de equações.
+    var linhas = 3;
+    
+    // Declarando matriz inicial
+    matriz = [];
+
+    //Populando matriz com os valores iniciais
+    for(var i = 0; i < linhas; i++){
+        matriz[i] = [1,3,1]
+    }
 
 }
 
-function minimizacao(){
+function minimizacao(){ // Função para processo de minimização
+
+}
+
+function imprimir(matriz, linhas){ // Função para imprimir a matriz
 
 }
