@@ -89,7 +89,7 @@ function maximizacao(){ // Função para processo de maximização
 
     //Escolhendo o termo de menor valor na linha z
     var valorminimo = Math.min(...matriz[3]);
-    imprimirTexto("O menor valor da coluna Z é " + valorminimo + ", sua linha foi escolhida.");
+    imprimirTexto("O menor valor da coluna Z é " + valorminimo + ", sua coluna foi escolhida.");
 
     var indice = matriz[linhas].indexOf(valorminimo); // Indice da coluna que será buscada
 
@@ -120,14 +120,31 @@ function maximizacao(){ // Função para processo de maximização
     //Modificando a linha do pivô
     for(var i = 0; i < matriz[indiceLinha].length; i++){
         matriz[indiceLinha][i] = matriz[indiceLinha][i]/pivo;
+        // (.toFixed(2));
     }
 
+    //Imprimindo matriz após modificar a linha do pivô
     imprimir(matriz, linhas);
 
     var pivo = matriz[indiceLinha][indice];
     imprimirTexto("Pivô após contas é: " + pivo);
 
+    // valor base da linha que será utilizado para a conta.
+    var valorbase;
+    //Modificando as demais linhas
+    for(var i = 0; i < linhas + 1; i++){
+        var valorbaseaux = matriz[i][indice];
+        if (i != indiceLinha){
+            
+            for(var j = 0; j < linhas + 3; j++){ 
+                valorbase = matriz[indiceLinha][j]; // Valor da linha que já foi modificada
+                matriz[i][j] = matriz[i][j]-(valorbaseaux*valorbase); //Adicionando novo valor na matriz, já calculado
+            }
+        }
+    }
 
+    //Imprimindo matriz após modificar todas as linhas
+    imprimir(matriz, linhas);
 }
 
 function minimizacao(){ // Função para processo de minimização
