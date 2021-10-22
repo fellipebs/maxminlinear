@@ -151,22 +151,40 @@ function minimizacao(){ // Função para processo de minimização
 
 }
 
+// Imprime a Matriz do sistema por completo!
 function imprimir(matriz, linhas){ // Função para imprimir a matriz
 
     $('#resultado').html($('#resultado').html() + "Resultados até o momento: \n");
 
     for(var i = 0; i < matriz.length; i++){
         for (var j = 0; j < matriz[i].length; j++){
-            $('#resultado').html($('#resultado').html() + "  " + matriz[i][j] + "  ");
+            $('#resultado').html($('#resultado').html() + "  " + (matriz[i][j]).toFixed(2) + "  ");
         }
         $('#resultado').html($('#resultado').html() + "\n");
     }
 
-    $('#resultado').html($('#resultado').html() + "------------------------------------------------------------------------ \n");
+    $('#resultado').html($('#resultado').html() + "-----------------------------------------------------------------------------------------------------------------  \n");
 
 }
 
+// Imprime qualquer texto no box de resultado
 function imprimirTexto(texto){
     $('#resultado').html($('#resultado').html() + "  " + texto + "  ");
-    $('#resultado').html($('#resultado').html() + "\n ------------------------------------------------------------------------ \n");
+    $('#resultado').html($('#resultado').html() + "\n ----------------------------------------------------------------------------------------------------------------- \n");
+}
+
+// Método bool para parar o loop, entre com a linha Z e ele retornará se existem valores negativos
+function paraLoop(matriz, vezesRodou){
+
+    if(vezesRodou > 49){
+        imprimirTexto("A função 50 vezes, por isso a execução será abortada, evitando loop infinito.");
+        return true;
+    }    
+
+    for(var i = 0; i < matriz.length; i++){
+        if(matriz[i] < 0)
+            return false;
+    }
+
+    return true;
 }
