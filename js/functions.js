@@ -80,19 +80,53 @@ function maximizacao(){ // Função para processo de maximização
     }
     //Fim população inicial
 
-    //Imprimindo a tabela inicial
+
+    // Começar o laço aqui
+
+
+    //Imprimindo a tabela atual
     imprimir(matriz, linhas);
 
     //Escolhendo o termo de menor valor na linha z
     var valorminimo = Math.min(...matriz[3]);
-    imprimirTexto(" O menor valor da coluna Z é " + valorminimo + ", sua linha foi escolhida.");
+    imprimirTexto("O menor valor da coluna Z é " + valorminimo + ", sua linha foi escolhida.");
 
     var indice = matriz[linhas].indexOf(valorminimo); // Indice da coluna que será buscada
 
-    // Continuar daqui amanhã
+    // criando vetor que irá receber os valores divididos
+    var vetAux = [];
     for(var i = 0; i < matriz.length - 1; i++){
-        console.log(matriz[i][linhas + 2] / matriz[i][indice] );
+        vetAux.push(matriz[i][linhas + 2] / matriz[i][indice]);
     }
+
+
+    //Escolhendo o termo de menor valor na linha z
+    var indiceLinha = Math.min(...vetAux);
+    indiceLinha = vetAux.indexOf(indiceLinha); // Indice da coluna que será buscada
+
+    var textoLinha = "A linha escolhida ("+ (indiceLinha+1) +") é: ";
+
+    for(var i = 0; i < matriz[indiceLinha].length; i++){
+        textoLinha += "  "+matriz[indiceLinha][i];
+    }
+
+    //Imprimindo linha que será utilizada
+    imprimirTexto(textoLinha);
+
+    //Escolhendo o pivô
+    var pivo = matriz[indiceLinha][indice];
+    imprimirTexto("O pivô escolhido é: " + pivo);
+
+    //Modificando a linha do pivô
+    for(var i = 0; i < matriz[indiceLinha].length; i++){
+        matriz[indiceLinha][i] = matriz[indiceLinha][i]/pivo;
+    }
+
+    imprimir(matriz, linhas);
+
+    var pivo = matriz[indiceLinha][indice];
+    imprimirTexto("Pivô após contas é: " + pivo);
+
 
 }
 
@@ -102,6 +136,8 @@ function minimizacao(){ // Função para processo de minimização
 
 function imprimir(matriz, linhas){ // Função para imprimir a matriz
 
+    $('#resultado').html($('#resultado').html() + "Resultados até o momento: \n");
+
     for(var i = 0; i < matriz.length; i++){
         for (var j = 0; j < matriz[i].length; j++){
             $('#resultado').html($('#resultado').html() + "  " + matriz[i][j] + "  ");
@@ -109,11 +145,11 @@ function imprimir(matriz, linhas){ // Função para imprimir a matriz
         $('#resultado').html($('#resultado').html() + "\n");
     }
 
-    $('#resultado').html($('#resultado').html() + "------------------------------------ \n");
+    $('#resultado').html($('#resultado').html() + "------------------------------------------------------------------------ \n");
 
 }
 
 function imprimirTexto(texto){
     $('#resultado').html($('#resultado').html() + "  " + texto + "  ");
-    $('#resultado').html($('#resultado').html() + "\n ------------------------------------ \n");
+    $('#resultado').html($('#resultado').html() + "\n ------------------------------------------------------------------------ \n");
 }
