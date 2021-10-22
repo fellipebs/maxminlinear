@@ -81,70 +81,88 @@ function maximizacao(){ // Função para processo de maximização
     //Fim população inicial
 
 
+    vezesRodou = 0;
     // Começar o laço aqui
-
-
     //Imprimindo a tabela atual
     imprimir(matriz, linhas);
 
-    //Escolhendo o termo de menor valor na linha z
-    var valorminimo = Math.min(...matriz[3]);
-    imprimirTexto("O menor valor da coluna Z é " + valorminimo + ", sua coluna foi escolhida.");
+    while(paraLoop(matriz[matriz.length-1],vezesRodou)){ // Passando linha Z como parametro e vezes que rodou.
+        
+        //Escolhendo o termo de menor valor na linha z
+        var valorminimo = Math.min(...matriz[3]);
+        imprimirTexto("O menor valor da coluna Z é " + valorminimo.toFixed(2) + ", sua coluna foi escolhida.");
 
-    var indice = matriz[linhas].indexOf(valorminimo); // Indice da coluna que será buscada
+        var indice = matriz[linhas].indexOf(valorminimo); // Indice da coluna que será buscada
 
-    // criando vetor que irá receber os valores divididos
-    var vetAux = [];
-    for(var i = 0; i < matriz.length - 1; i++){
-        vetAux.push(matriz[i][linhas + 2] / matriz[i][indice]);
-    }
+        // criando vetor que irá receber os valores divididos
+        var vetAux = [];
+        for(var i = 0; i < matriz.length - 1; i++){
+            vetAux.push(matriz[i][linhas + 2] / matriz[i][indice]);
+        }
 
 
-    //Escolhendo o termo de menor valor na linha z
-    var indiceLinha = Math.min(...vetAux);
-    indiceLinha = vetAux.indexOf(indiceLinha); // Indice da coluna que será buscada
+        //Escolhendo o termo de menor valor na linha z
+        var indiceLinha = Math.min(...vetAux);
+        indiceLinha = vetAux.indexOf(indiceLinha); // Indice da coluna que será buscada
 
-    var textoLinha = "A linha escolhida ("+ (indiceLinha+1) +") é: ";
+        var textoLinha = "A linha escolhida ("+ (indiceLinha+1) +") é: ";
 
-    for(var i = 0; i < matriz[indiceLinha].length; i++){
-        textoLinha += "  "+matriz[indiceLinha][i];
-    }
+        // Loop para escrever a linha
+        for(var i = 0; i < matriz[indiceLinha].length; i++){
+            textoLinha += "  "+(matriz[indiceLinha][i]).toFixed(2);
+        }
 
-    //Imprimindo linha que será utilizada
-    imprimirTexto(textoLinha);
+        //Imprimindo linha que será utilizada
+        imprimirTexto(textoLinha);
 
-    //Escolhendo o pivô
-    var pivo = matriz[indiceLinha][indice];
-    imprimirTexto("O pivô escolhido é: " + pivo);
+        //Escolhendo o pivô
+        var pivo = matriz[indiceLinha][indice];
+        imprimirTexto("O pivô escolhido é: " + pivo.toFixed(2));
 
-    //Modificando a linha do pivô
-    for(var i = 0; i < matriz[indiceLinha].length; i++){
-        matriz[indiceLinha][i] = matriz[indiceLinha][i]/pivo;
-        // (.toFixed(2));
-    }
+        //Modificando a linha do pivô
+        for(var i = 0; i < matriz[indiceLinha].length; i++){
+            matriz[indiceLinha][i] = matriz[indiceLinha][i]/pivo;
+        }
 
-    //Imprimindo matriz após modificar a linha do pivô
-    imprimir(matriz, linhas);
+        //Imprimindo matriz após modificar a linha do pivô
+        imprimir(matriz, linhas);
 
-    var pivo = matriz[indiceLinha][indice];
-    imprimirTexto("Pivô após contas é: " + pivo);
+        var pivo = matriz[indiceLinha][indice];
+        imprimirTexto("Pivô após contas é: " + pivo);
 
-    // valor base da linha que será utilizado para a conta.
-    var valorbase;
-    //Modificando as demais linhas
-    for(var i = 0; i < linhas + 1; i++){
-        var valorbaseaux = matriz[i][indice];
-        if (i != indiceLinha){
-            
-            for(var j = 0; j < linhas + 3; j++){ 
-                valorbase = matriz[indiceLinha][j]; // Valor da linha que já foi modificada
-                matriz[i][j] = matriz[i][j]-(valorbaseaux*valorbase); //Adicionando novo valor na matriz, já calculado
+        // valor base da linha que será utilizado para a conta.
+        var valorbase;
+        //Modificando as demais linhas
+        for(var i = 0; i < linhas + 1; i++){
+            var valorbaseaux = matriz[i][indice];
+            if (i != indiceLinha){
+                for(var j = 0; j < linhas + 3; j++){ 
+                    valorbase = matriz[indiceLinha][j]; // Valor da linha que já foi modificada
+                    matriz[i][j] = matriz[i][j]-(valorbaseaux*valorbase); //Adicionando novo valor na matriz, já calculado
+                }
             }
         }
+
+        //Fim do loop
+        //Imprimindo a tabela atual
+        imprimir(matriz, linhas);
+        vezesRodou++; // Controlador para evitar loop infinito
     }
 
-    //Imprimindo matriz após modificar todas as linhas
-    imprimir(matriz, linhas);
+    if(vezesRodou < 49){
+        var textoFinal = "";
+        for(var i = 0; i < matriz.length; i++){
+            if(matriz[i][0] == 1){
+                textoFinal += "X é: "+ matriz[i][linhas + 2].toFixed(2)+"\n";
+            }
+
+            if(matriz[i][1] == 1){
+                textoFinal += "  Y é: "+ matriz[i][linhas + 2].toFixed(2) + "\n";
+            }
+        } 
+
+        imprimirTexto(textoFinal);
+    }
 }
 
 function minimizacao(){ // Função para processo de minimização
@@ -163,14 +181,14 @@ function imprimir(matriz, linhas){ // Função para imprimir a matriz
         $('#resultado').html($('#resultado').html() + "\n");
     }
 
-    $('#resultado').html($('#resultado').html() + "-----------------------------------------------------------------------------------------------------------------  \n");
+    $('#resultado').html($('#resultado').html() + "-----------------------------------------------------------------------------------------------------------------\n");
 
 }
 
 // Imprime qualquer texto no box de resultado
 function imprimirTexto(texto){
     $('#resultado').html($('#resultado').html() + "  " + texto + "  ");
-    $('#resultado').html($('#resultado').html() + "\n ----------------------------------------------------------------------------------------------------------------- \n");
+    $('#resultado').html($('#resultado').html() + "\n-----------------------------------------------------------------------------------------------------------------\n");
 }
 
 // Método bool para parar o loop, entre com a linha Z e ele retornará se existem valores negativos
@@ -178,13 +196,13 @@ function paraLoop(matriz, vezesRodou){
 
     if(vezesRodou > 49){
         imprimirTexto("A função 50 vezes, por isso a execução será abortada, evitando loop infinito.");
-        return true;
+        return false;
     }    
 
     for(var i = 0; i < matriz.length; i++){
         if(matriz[i] < 0)
-            return false;
+            return true;
     }
 
-    return true;
+    return false;
 }
