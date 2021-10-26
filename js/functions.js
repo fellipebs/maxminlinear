@@ -167,6 +167,58 @@ function maximizacao(){ // Função para processo de maximização
 
 function minimizacao(){ // Função para processo de minimização
 
+    //Numero de equações.
+    var linhas = 3;
+    
+    // Declarando matriz inicial
+    matriz = [];
+
+    //Populando matriz com os valores iniciais
+    for(var i = 0; i < linhas; i++){
+
+        matriz[i] = [];
+        aux = 0; // Variavel de controle
+
+        for(var j = 0; j < linhas + 3; j++){ // linhas + 3, pois é o valor de equações + x,y e RS
+
+            if(j == 0) //Popular o X 
+                matriz[i][j] = parseFloat($('#X'+(i+1)).val()) * - 1;
+            else if(j == 1) //Popular o Y
+                matriz[i][j] = parseFloat($('#Y'+(i+1)).val()) * - 1;
+            else if(j == linhas + 2){
+                matriz[i][j] = parseFloat($('#RS'+(i+1)).val()) * - 1;   
+            }else{
+
+                if(aux != i){ // Preenchendo os valores adicionais com 0 e 1 (diagonal principal)
+                    matriz[i][j] = 0;   
+                }else{
+                    matriz[i][j] = 1;   
+                }
+                aux++;
+            }
+
+        }
+
+        aux = 0; // Variavel de controle
+    }
+
+    matriz[linhas] = []; // Iniciando fila final para valor de zx e zy
+    matriz[linhas][0] = parseFloat($('#Zx').val()); // Multiplicando por -1 para mudar o sinal
+    matriz[linhas][1] = parseFloat($('#Yx').val());
+    for(var i = 0; i <= linhas; i++){
+        matriz[linhas][i + 2] = 0;
+    }
+    //Fim população inicial
+
+
+    vezesRodou = 0;
+    // Começar o laço aqui
+    //Imprimindo a tabela atual
+    imprimir(matriz, linhas);
+
+
+
+    
 }
 
 // Imprime a Matriz do sistema por completo!
