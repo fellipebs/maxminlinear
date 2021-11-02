@@ -256,7 +256,6 @@ function minimizacao(){ // Função para processo de minimização
         }
     }
 
-    console.log(indiceColuna);
     var textoLinha = "A coluna escolhida ("+ (indiceColuna+1) +") é: \n";
 
     // Loop para escrever a linha
@@ -352,7 +351,6 @@ function imprimirTexto(texto){
 
 // Método bool para parar o loop, entre com a linha Z e ele retornará se existem valores negativos - Maximização
 function paraLoopMaximizacao(matriz, vezesRodou){
-
     if(vezesRodou > 49){
         imprimirTexto("A função 50 vezes, por isso a execução será abortada, evitando loop infinito.");
         return false;
@@ -368,7 +366,6 @@ function paraLoopMaximizacao(matriz, vezesRodou){
 
 // Método bool para parar o loop, entre com a matriz e ele retornará se a coluna RS possui valores negativos - Minimização
 function paraLoopMinizacao(matriz, vezesRodou){
-
     if(vezesRodou > 49){
         imprimirTexto("A função 50 vezes, por isso a execução será abortada, evitando loop infinito.");
         return false;
