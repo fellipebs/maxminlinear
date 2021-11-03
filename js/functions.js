@@ -160,6 +160,7 @@ function maximizacao(){ // Função para processo de maximização
                 textoFinal += "  Y é: "+ matriz[i][linhas + 2].toFixed(2) + "\n";
             }
         } 
+        textoFinal += "  Z é: "+ matriz[matriz.length - 1][linhas + 2].toFixed(2) + "\n";
 
         imprimirTexto(textoFinal);
     }
