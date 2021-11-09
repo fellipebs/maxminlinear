@@ -218,7 +218,7 @@ function minimizacao(){ // Função para processo de minimização
         if(matriz[linhaminimo][i] == 0 )
             vetAux.push(0);
         else{
-            // forçando o resultado a ser sempre prositivo
+            // forçando o resultado a ser sempre positivo
             resultado = matriz[matriz.length - 1][i] / matriz[linhaminimo][i];
             if(resultado < 0)
                 resultado = resultado * - 1;
