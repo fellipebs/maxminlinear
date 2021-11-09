@@ -6,28 +6,8 @@ function processar(){
     var Zx = $('#Zx').val();
     var Yx = $('#Yx').val();
 
-    var x1 = $('#X1').val();
-    var y1 = $('#Y1').val();
-    var operacao1 = $('#operacao1').val();
-    var RS1 = $('#RS1').val();
-
-    var x2 = $('#X2').val();
-    var y2 = $('#Y2').val();
-    var operacao2 = $('#operacao2').val();
-    var RS2 = $('#RS2').val();
-
-    var x3 = $('#X3').val();
-    var y3 = $('#Y3').val();
-    var operacao3 = $('#operacao3').val();
-    var RS3 = $('#RS3').val();
-
-    if(Zx == "" || Yx == "" ||
-       x1 == "" || y1 == "" || operacao1 == "" || RS1 == "" ||
-       x2 == "" || y2 == "" || operacao2 == "" || RS2 == "" ||
-       x3 == "" || y3 == "" || operacao3 == "" || RS3 == ""){
-
+    if(Zx == "" || Yx == ""){
         alert('Favor, preencha todos os campos corretamente.');
-
     }else if($('#metodo').val() == '1'){
         maximizacao();
     }else{
@@ -38,7 +18,8 @@ function processar(){
 function maximizacao(){ // Função para processo de maximização
 
     //Numero de equações.
-    var linhas = 3;
+
+    var linhas = validaNumLinhas();
     
     // Declarando matriz inicial
     matriz = [];
@@ -89,7 +70,7 @@ function maximizacao(){ // Função para processo de maximização
     while(paraLoopMaximizacao(matriz[matriz.length-1],vezesRodou)){ // Passando linha Z como parametro e vezes que rodou.
         
         //Escolhendo o termo de menor valor na linha z
-        var valorminimo = Math.min(...matriz[3]);
+        var valorminimo = Math.min(...matriz[linhas]);
         imprimirTexto("O menor valor da coluna Z é " + valorminimo.toFixed(2) + ", sua coluna foi escolhida.");
 
         var indice = matriz[linhas].indexOf(valorminimo); // Indice da coluna que será buscada
@@ -169,7 +150,7 @@ function maximizacao(){ // Função para processo de maximização
 function minimizacao(){ // Função para processo de minimização
 
     //Numero de equações.
-    var linhas = 3;
+    var linhas = validaNumLinhas();
     
     // Declarando matriz inicial
     matriz = [];
@@ -379,4 +360,30 @@ function paraLoopMinizacao(matriz, vezesRodou){
     }
 
     return false;
+}
+
+function validaNumLinhas(){
+    var numlinhas = 0;
+    var x1 = $('#X1').val();
+    var y1 = $('#Y1').val();
+    var RS1 = $('#RS1').val();
+
+    if(x1 != "" || y1 != "" || RS1 != "")
+        numlinhas++;
+
+    var x2 = $('#X2').val();
+    var y2 = $('#Y2').val();
+    var RS2 = $('#RS2').val();
+
+    if(x2 != "" || y2 != "" || RS2 != "")
+        numlinhas++;
+
+    var x3 = $('#X3').val();
+    var y3 = $('#Y3').val();
+    var RS3 = $('#RS3').val();
+
+    if(x3 != "" || y3 != "" || RS3 != "")
+        numlinhas++;
+
+    return numlinhas;
 }
